@@ -1,0 +1,9 @@
+{
+  "name": "pmm-dms-mail-service",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Vercel mail endpoint for Popular Mega Motors DMS",
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.vercel/
+__pycache__/
+*.pyc
+backend/db/*.sqlite
+backend/db/*.sqlite-journal
+backend/uploads/
+backend/generated_pdfs/
+backend/.env
+frontend/.env
+mail-service/.env
