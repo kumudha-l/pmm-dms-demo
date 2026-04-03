@@ -54,7 +54,7 @@ function getPillClasses(status) {
 }
 
 function initialLead(models = []) {
-  const firstModel = models[0]?.model || "Tata Nexon";
+  const firstModel = models[0]?.model || "Maruti Suzuki Brezza";
   const firstVariant = models[0]?.variants?.[0]?.variant || "";
   return {
     customer_name: "",
@@ -70,7 +70,7 @@ function initialLead(models = []) {
   };
 }
 
-function initialTestDrive(model = "Tata Nexon") {
+function initialTestDrive(model = "Maruti Suzuki Brezza") {
   return { model, scheduled_date: todayValue(), scheduled_time: "11:00", status: "Scheduled", notes: "" };
 }
 
@@ -78,7 +78,7 @@ function initialFeedback() {
   return { rating_experience: 0, rating_comfort: 0, rating_advisor: 0, next_intent: "", follow_up_date: "", notes: "" };
 }
 
-function initialBooking(model = "Tata Nexon", variant = "") {
+function initialBooking(model = "Maruti Suzuki Brezza", variant = "") {
   return {
     model,
     variant,
@@ -234,8 +234,8 @@ export default function CustomerOnboarding() {
         setCatalog(response.catalog);
         setLeads(response.items);
         setLeadForm(initialLead(response.catalog.models));
-        setTestDriveForm(initialTestDrive(response.catalog.models?.[0]?.model || "Tata Nexon"));
-        setBookingForm(initialBooking(response.catalog.models?.[0]?.model || "Tata Nexon", response.catalog.models?.[0]?.variants?.[0]?.variant || ""));
+        setTestDriveForm(initialTestDrive(response.catalog.models?.[0]?.model || "Maruti Suzuki Brezza"));
+        setBookingForm(initialBooking(response.catalog.models?.[0]?.model || "Maruti Suzuki Brezza", response.catalog.models?.[0]?.variants?.[0]?.variant || ""));
       } finally {
         setLoading(false);
       }
@@ -249,7 +249,7 @@ export default function CustomerOnboarding() {
       customer_name: lead.customer_name || "",
       phone: lead.phone || "",
       email: lead.email || "",
-      interested_model: lead.interested_model || catalog.models?.[0]?.model || "Tata Nexon",
+      interested_model: lead.interested_model || catalog.models?.[0]?.model || "Maruti Suzuki Brezza",
       interested_variant: lead.interested_variant || modelMap[lead.interested_model]?.[0]?.variant || "",
       showroom_location: lead.showroom_location || SHOWROOMS[0],
       enquiry_source: lead.enquiry_source || ENQUIRY_SOURCES[0],
@@ -258,7 +258,7 @@ export default function CustomerOnboarding() {
       follow_up_date: lead.follow_up_date || "",
     });
     setTestDriveForm({
-      model: lead.test_drive?.model || lead.interested_model || "Tata Nexon",
+      model: lead.test_drive?.model || lead.interested_model || "Maruti Suzuki Brezza",
       scheduled_date: lead.test_drive?.scheduled_date || todayValue(),
       scheduled_time: lead.test_drive?.scheduled_time || "11:00",
       status: lead.test_drive?.status || "Scheduled",
@@ -272,11 +272,11 @@ export default function CustomerOnboarding() {
       follow_up_date: lead.feedback?.follow_up_date || lead.follow_up_date || "",
       notes: lead.feedback?.notes || "",
     });
-    const availabilityModel = lead.estimate?.model || lead.interested_model || "Tata Nexon";
+    const availabilityModel = lead.estimate?.model || lead.interested_model || "Maruti Suzuki Brezza";
     setAvailability({ model: availabilityModel, stock: lead.availability || [], variants: modelMap[availabilityModel] || [] });
     setEstimateVariant(lead.estimate?.variant || lead.interested_variant || modelMap[availabilityModel]?.[0]?.variant || "");
     setBookingForm({
-      model: lead.booking?.model || lead.estimate?.model || lead.interested_model || "Tata Nexon",
+      model: lead.booking?.model || lead.estimate?.model || lead.interested_model || "Maruti Suzuki Brezza",
       variant: lead.booking?.variant || lead.estimate?.variant || lead.interested_variant || "",
       color_preference: lead.booking?.color_preference || "",
       finance_type: lead.booking?.finance_type || FINANCE_OPTIONS[0],
@@ -294,7 +294,7 @@ export default function CustomerOnboarding() {
 
   function resetToNew() {
     setCurrentLead(null);
-    const firstModel = catalog.models?.[0]?.model || "Tata Nexon";
+    const firstModel = catalog.models?.[0]?.model || "Maruti Suzuki Brezza";
     const firstVariant = catalog.models?.[0]?.variants?.[0]?.variant || "";
     setLeadForm(initialLead(catalog.models));
     setTestDriveForm(initialTestDrive(firstModel));

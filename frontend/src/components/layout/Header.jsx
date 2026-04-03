@@ -15,11 +15,12 @@ export default function Header() {
             <img
               src="/popular-mega-motors-logo.jpg"
               alt="Popular Mega Motors"
-              className="h-14 w-auto max-w-[240px] object-contain sm:h-16 sm:max-w-[280px]"
+              className="h-24 w-24 object-contain sm:h-28 sm:w-28"
             />
           </Link>
           <nav className="flex flex-1 items-center justify-center gap-1 text-sm">
             <NavLink to="/" className={({ isActive }) => `border-b-2 px-4 py-2 font-medium ${isActive ? "border-primary-500 text-primary-600" : "border-transparent text-slate-500 hover:text-primary-600"}`}>Dashboard</NavLink>
+            <NavLink to="/check-in" className={({ isActive }) => `border-b-2 px-4 py-2 font-medium ${isActive ? "border-primary-500 text-primary-600" : "border-transparent text-slate-500 hover:text-primary-600"}`}>Check-in</NavLink>
             <NavLink to="/job-cards/new?step=intake" className={({ isActive }) => `border-b-2 px-4 py-2 font-medium ${isActive ? "border-primary-500 text-primary-600" : "border-transparent text-slate-500 hover:text-primary-600"}`}>New Job Card</NavLink>
             <NavLink to="/technician" className={({ isActive }) => `border-b-2 px-4 py-2 font-medium ${isActive ? "border-primary-500 text-primary-600" : "border-transparent text-slate-500 hover:text-primary-600"}`}>Technician View</NavLink>
             <NavLink to="/inventory" className={({ isActive }) => `border-b-2 px-4 py-2 font-medium ${isActive ? "border-primary-500 text-primary-600" : "border-transparent text-slate-500 hover:text-primary-600"}`}>Inventory</NavLink>

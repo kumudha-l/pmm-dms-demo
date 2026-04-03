@@ -52,6 +52,7 @@ def _build_catalog_summary(conn) -> list[dict]:
         row_dict = dict(row)
         grouped[row_dict["model"]].append(
             {
+                "make": row_dict["make"],
                 "variant": row_dict["variant"],
                 "ex_showroom_price": row_dict["ex_showroom_price"],
                 "road_tax_rate": row_dict["road_tax_rate"],
@@ -60,7 +61,7 @@ def _build_catalog_summary(conn) -> list[dict]:
                 "handling_cost": row_dict["handling_cost"],
             }
         )
-    return [{"make": "Tata", "model": model, "variants": variants} for model, variants in grouped.items()]
+    return [{"make": variants[0]["make"] if variants else "", "model": model, "variants": variants} for model, variants in grouped.items()]
 
 
 def get_sales_catalog(conn) -> dict:

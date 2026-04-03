@@ -34,6 +34,7 @@ from db.init import initialize_database
 from db.seed import seed_data
 from routes.dashboard import router as dashboard_router
 from routes.inventory import router as inventory_router
+from routes.check_ins import router as check_ins_router
 from routes.job_cards import router as job_cards_router
 from routes.mock import router as mock_router
 from routes.sales import router as sales_router
@@ -83,6 +84,7 @@ def health():
 app.include_router(mock_router)
 app.include_router(vehicles_router)
 app.include_router(job_cards_router)
+app.include_router(check_ins_router)
 app.include_router(technicians_router)
 app.include_router(inventory_router)
 app.include_router(dashboard_router)

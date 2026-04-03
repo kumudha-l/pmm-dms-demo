@@ -8,7 +8,7 @@ export const ADD_ON_SERVICES = [
   { service_name: "Exterior Foam Wash", unit_cost: 650, source_type: "ADD SERVICES" },
   { service_name: "Polishing", unit_cost: 1200, source_type: "ADD SERVICES" },
   { service_name: "Underbody Coating", unit_cost: 1450, source_type: "ADD SERVICES" },
-  { service_name: "Wheel Balancing", unit_cost: 650, source_type: "ADD SERVICES" },
+  { service_name: "Maruti Suzuki 2-year Service", unit_cost: 12000, source_type: "ADD SERVICES" },
   { service_name: "Pickup and Drop", unit_cost: 550, source_type: "ADD SERVICES" },
 ];
 
@@ -28,4 +28,5 @@ export const SERVICE_CATALOG = {
   "LAB-POLISH": { service_catalog_id: "svc_013", service_name: "Exterior Polishing", unit_cost: 1200, estimated_time_mins: 60 },
   "LAB-INT-CLEAN": { service_catalog_id: "svc_014", service_name: "Interior Cleaning", unit_cost: 850, estimated_time_mins: 40 },
   "LAB-DIAG-SCAN": { service_catalog_id: "svc_015", service_name: "Diagnostic Scan", unit_cost: 980, estimated_time_mins: 25 },
+  "LAB-MARUTI-2YR": { service_catalog_id: "svc_016", service_name: "Maruti Suzuki 2-year Service", unit_cost: 12000, estimated_time_mins: 120 },
 };

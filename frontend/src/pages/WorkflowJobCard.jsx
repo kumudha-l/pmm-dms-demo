@@ -111,7 +111,7 @@ export default function WorkflowJobCard() {
   const [plateFile, setPlateFile] = useState(null);
   const [odometerFile, setOdometerFile] = useState(null);
   const [regNo, setRegNo] = useState(query.get("regNo") || "");
-  const [openingKm, setOpeningKm] = useState("");
+  const [openingKm, setOpeningKm] = useState("0");
   const [vehicle, setVehicle] = useState(null);
   const [history, setHistory] = useState([]);
   const [paymentHistory, setPaymentHistory] = useState([]);
@@ -591,7 +591,9 @@ export default function WorkflowJobCard() {
       <div className="space-y-6">
         <WorkflowStepper steps={STEPS} activeStep={activeStep} onSelect={syncStep} />
         {renderMainStep()}
-        {activeStep !== "history" && vehicle && history.length ? <ServiceHistory history={history.slice(0, 3)} paymentHistory={paymentHistory.slice(0, 3)} /> : null}
+        {(activeStep === "complaint" || activeStep === "estimate" || activeStep === "approval") && vehicle && history.length
+          ? <ServiceHistory history={history.slice(0, 3)} paymentHistory={paymentHistory.slice(0, 3)} />
+          : null}
       </div>
       <BottomBar>
         <div className="flex flex-wrap items-center justify-between gap-3">

@@ -7,6 +7,7 @@ import Billing from "./pages/Billing";
 import Delivery from "./pages/Delivery";
 import Inventory from "./pages/Inventory";
 import CustomerOnboarding from "./pages/CustomerOnboarding";
+import CheckIn from "./pages/CheckIn";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/check-in" element={<CheckIn />} />
         <Route path="/job-cards/new" element={<WorkflowJobCard />} />
         <Route path="/job-cards/:jobCardId" element={<WorkflowJobCard />} />
         <Route path="/technician" element={<TechnicianWorkbench />} />

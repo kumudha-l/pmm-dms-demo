@@ -20,6 +20,7 @@ def insert_many(conn, table: str, rows: list[dict]) -> None:
 
 def reset(conn) -> None:
     for table in [
+        "service_checkins",
         "notifications",
         "payments",
         "job_card_technicians",
@@ -49,18 +50,18 @@ def seed_data() -> None:
         reset(conn)
 
         customers = [
-            ("cust_001", "CUST-1001", "Rajan Pillai", "+91 98470 11001", "rajan.pillai@example.com", "Panampilly Nagar, Kochi", "Retail"),
-            ("cust_002", "CUST-1002", "Anjali Nair", "+91 98470 11002", "anjali.nair@example.com", "Kakkanad, Kochi", "Retail"),
-            ("cust_003", "CUST-1003", "Suresh Menon", "+91 98470 11003", "suresh.menon@example.com", "Thrippunithura, Kochi", "Corporate"),
-            ("cust_004", "CUST-1004", "Meera Krishnan", "+91 98470 11004", "meera.krishnan@example.com", "Edappally, Kochi", "Retail"),
-            ("cust_005", "CUST-1005", "Joseph Varghese", "+91 98470 11005", "joseph.varghese@example.com", "Aluva, Kochi", "Fleet"),
-            ("cust_006", "CUST-1006", "Fathima Rahman", "+91 98470 11006", "fathima.rahman@example.com", "Fort Kochi, Kochi", "Retail"),
-            ("cust_007", "CUST-1007", "Arun Babu", "+91 98470 11007", "arun.babu@example.com", "Kaloor, Kochi", "Retail"),
-            ("cust_008", "CUST-1008", "Lakshmi Prasad", "+91 98470 11008", "lakshmi.prasad@example.com", "Tripunithura, Kochi", "Government"),
-            ("cust_009", "CUST-1009", "Nikhil Thomas", "+91 98470 11009", "nikhil.thomas@example.com", "Kottayam", "Retail"),
-            ("cust_010", "CUST-1010", "Devika Mohan", "+91 98470 11010", "devika.mohan@example.com", "Kadavanthra, Kochi", "Staff"),
-            ("cust_011", "CUST-1011", "Basil George", "+91 98470 11011", "basil.george@example.com", "Thrissur", "Fleet"),
-            ("cust_012", "CUST-1012", "Priya Radhakrishnan", "+91 98470 11012", "priya.radha@example.com", "Palarivattom, Kochi", "Retail"),
+            ("cust_001", "CUST-1001", "Rajan", "+91 98470 11001", "rajan@example.com", "Panampilly Nagar, Kochi", "Retail"),
+            ("cust_002", "CUST-1002", "Anjali", "+91 98470 11002", "anjali@example.com", "Kakkanad, Kochi", "Retail"),
+            ("cust_003", "CUST-1003", "Suresh", "+91 98470 11003", "suresh@example.com", "Thrippunithura, Kochi", "Corporate"),
+            ("cust_004", "CUST-1004", "Meera", "+91 98470 11004", "meera@example.com", "Edappally, Kochi", "Retail"),
+            ("cust_005", "CUST-1005", "Joseph", "+91 98470 11005", "joseph@example.com", "Aluva, Kochi", "Fleet"),
+            ("cust_006", "CUST-1006", "Fathima", "+91 98470 11006", "fathima@example.com", "Fort Kochi, Kochi", "Retail"),
+            ("cust_007", "CUST-1007", "Arun", "+91 98470 11007", "arun@example.com", "Kaloor, Kochi", "Retail"),
+            ("cust_008", "CUST-1008", "Lakshmi", "+91 98470 11008", "lakshmi@example.com", "Tripunithura, Kochi", "Government"),
+            ("cust_009", "CUST-1009", "Nikhil", "+91 98470 11009", "nikhil@example.com", "Kottayam", "Retail"),
+            ("cust_010", "CUST-1010", "Devika", "+91 98470 11010", "devika@example.com", "Kadavanthra, Kochi", "Staff"),
+            ("cust_011", "CUST-1011", "Basil", "+91 98470 11011", "basil@example.com", "Thrissur", "Fleet"),
+            ("cust_012", "CUST-1012", "Priya", "+91 98470 11012", "priya@example.com", "Palarivattom, Kochi", "Retail"),
         ]
         insert_many(
             conn,
@@ -82,17 +83,17 @@ def seed_data() -> None:
 
         vehicle_defs = [
             ("veh_001", "KL47F7878", "cust_001", "Maruti Suzuki", "Swift", "ZXi", "Petrol", "Manual", 2023, "Red", 15823),
-            ("veh_002", "KL38F8616", "cust_002", "Tata", "Nexon", "XZ+ Diesel", "Diesel", "Manual", 2022, "Grey", 24112),
-            ("veh_003", "WB06F5977", "cust_003", "Tata", "Altroz", "XM+", "Petrol", "Manual", 2021, "Grey", 30245),
-            ("veh_004", "MH12DE1433", "cust_004", "Hyundai", "Creta", "SX IVT", "Petrol", "CVT", 2024, "White", 8234),
-            ("veh_005", "KL22IJ5678", "cust_005", "Maruti Suzuki", "Baleno", "Alpha AMT", "Petrol", "AMT", 2022, "Blue", 18876),
-            ("veh_006", "KL01KL6789", "cust_006", "Tata", "Tiago", "XZ CNG", "CNG", "Manual", 2023, "White", 12101),
-            ("veh_007", "KL13MN7890", "cust_007", "Tata", "Punch", "Adventure", "Petrol", "Manual", 2024, "Green", 6950),
-            ("veh_008", "KL24OP8901", "cust_008", "Hyundai", "i20", "Asta", "Petrol", "CVT", 2021, "Blue", 27654),
+            ("veh_002", "KL38F8616", "cust_002", "Maruti Suzuki", "Brezza", "ZXi AT", "Petrol", "Automatic", 2022, "Grey", 24112),
+            ("veh_003", "WB06F5977", "cust_003", "Maruti Suzuki", "Baleno", "Alpha AMT", "Petrol", "AMT", 2021, "Grey", 30245),
+            ("veh_004", "MH12DE1433", "cust_004", "Maruti Suzuki", "Grand Vitara", "Zeta AT", "Petrol", "Automatic", 2024, "White", 8234),
+            ("veh_005", "KL22IJ5678", "cust_005", "Maruti Suzuki", "Ertiga", "ZXi", "Petrol", "Manual", 2022, "Blue", 18876),
+            ("veh_006", "KL01KL6789", "cust_006", "Maruti Suzuki", "WagonR", "ZXi CNG", "CNG", "Manual", 2023, "White", 12101),
+            ("veh_007", "KL13MN7890", "cust_007", "Maruti Suzuki", "Fronx", "Delta+ Turbo", "Petrol", "Manual", 2024, "Green", 6950),
+            ("veh_008", "KL24OP8901", "cust_008", "Maruti Suzuki", "Dzire", "ZXi AMT", "Petrol", "AMT", 2021, "Blue", 27654),
             ("veh_009", "KL05QR9012", "cust_009", "Maruti Suzuki", "Swift", "VXi", "Petrol", "Manual", 2020, "White", 40128),
-            ("veh_010", "KL41ST0123", "cust_010", "Tata", "Nexon", "Fearless DCT", "Petrol", "DCT", 2024, "Red", 4320),
-            ("veh_011", "KL14UV1235", "cust_011", "Tata", "Altroz", "XT Diesel", "Diesel", "Manual", 2022, "Blue", 35442),
-            ("veh_012", "KL09WX2346", "cust_012", "Hyundai", "Creta", "SX(O) Diesel AT", "Diesel", "Automatic", 2023, "Grey", 16780),
+            ("veh_010", "KL41ST0123", "cust_010", "Maruti Suzuki", "Celerio", "ZXi AMT", "Petrol", "AMT", 2024, "Red", 4320),
+            ("veh_011", "KL14UV1235", "cust_011", "Maruti Suzuki", "XL6", "Alpha AT", "Petrol", "Automatic", 2022, "Blue", 35442),
+            ("veh_012", "KL09WX2346", "cust_012", "Maruti Suzuki", "Ignis", "Alpha AMT", "Petrol", "AMT", 2023, "Grey", 16780),
         ]
         insert_many(
             conn,
@@ -195,6 +196,7 @@ def seed_data() -> None:
             ("svc_013", "LAB-POLISH", "Exterior Polishing", "Add-on", 1200, 60),
             ("svc_014", "LAB-INT-CLEAN", "Interior Cleaning", "Add-on", 850, 40),
             ("svc_015", "LAB-DIAG-SCAN", "Diagnostic Scan", "Diagnostics", 980, 25),
+            ("svc_016", "LAB-MARUTI-2YR", "Maruti Suzuki 2-year Service", "Add-on", 12000, 120),
         ]
         insert_many(
             conn,
@@ -234,16 +236,16 @@ def seed_data() -> None:
         insert_many(conn, "service_history", history_rows)
 
         job_cards = [
-            ("jc_001", "JC-2026-0001", "veh_001", "cust_001", "Arjun M.", 15823, "Brake noise from front, also need free service", [{"issue": "Front brake noise", "category": "Brake", "priority": "Medium"}], "Front brake pad wear visible.", "Brake pad inspection, brake cleaning, second service items", 5782, 5782, 250, 650, 882, "Approved by Customer", "Unpaid", "Billing In Progress", "2nd Free Service", "Walk-in", 1, "Approved by Rajan Pillai", "", "Bay 3"),
+            ("jc_001", "JC-2026-0001", "veh_001", "cust_001", "Arjun M.", 15823, "Brake noise from front, also need free service", [{"issue": "Front brake noise", "category": "Brake", "priority": "Medium"}], "Front brake pad wear visible.", "Brake pad inspection, brake cleaning, second service items", 17132, 17132, 250, 12000, 2602, "Approved by Customer", "Unpaid", "Billing In Progress", "2nd Free Service", "Walk-in", 1, "Approved by Rajan", "", "Bay 3"),
             ("jc_002", "JC-2026-0002", "veh_002", "cust_002", "Neethu R.", 24112, "Steering pulling left and uneven tyre wear", [{"issue": "Wheel alignment required", "category": "Wheel Alignment", "priority": "Medium"}], "Inner tyre wear noted.", "Wheel alignment and balancing", 3120, 0, 0, 0, 476, "Pending", "Unpaid", "Awaiting Approval", "Running Repair", "Online Booking", 0, "", "", ""),
-            ("jc_003", "JC-2026-0003", "veh_003", "cust_003", "Arjun M.", 30245, "AC cooling low and battery warning once", [{"issue": "AC performance issue", "category": "AC / HVAC", "priority": "High"}, {"issue": "Electrical warning", "category": "Electrical", "priority": "Medium"}], "Blower noise audible.", "AC diagnosis and electrical diagnosis", 8460, 0, 300, 0, 1290, "Approved by Customer", "Unpaid", "Assigned", "Running Repair", "Phone Booking", 0, "Approved by Suresh Menon", "", "Bay 8"),
-            ("jc_004", "JC-2026-0004", "veh_004", "cust_004", "Neethu R.", 8234, "Routine 2nd free service and car wash", [{"issue": "Scheduled service due", "category": "Service", "priority": "Low"}], "No abnormality noted.", "2nd free service items", 2480, 2480, 0, 850, 378, "Approved by Customer", "Paid", "Closed", "2nd Free Service", "Online Booking", 0, "Approved by Meera Krishnan", "", "Bay 2"),
-            ("jc_005", "JC-2026-0005", "veh_005", "cust_005", "Arjun M.", 18876, "Brake issue plus alignment required", [{"issue": "Brake pad wear", "category": "Brake", "priority": "High"}], "Front pad wear and steering vibration.", "Brake pad replacement and wheel alignment", 9120, 9430, 450, 650, 1439, "Re-approval Required", "Unpaid", "In Progress", "Running Repair", "Walk-in", 1, "Initial approval from Joseph Varghese", "", "Bay 4"),
+            ("jc_003", "JC-2026-0003", "veh_003", "cust_003", "Arjun M.", 30245, "AC cooling low and battery warning once", [{"issue": "AC performance issue", "category": "AC / HVAC", "priority": "High"}, {"issue": "Electrical warning", "category": "Electrical", "priority": "Medium"}], "Blower noise audible.", "AC diagnosis and electrical diagnosis", 8460, 0, 300, 0, 1290, "Approved by Customer", "Unpaid", "Assigned", "Running Repair", "Phone Booking", 0, "Approved by Suresh", "", "Bay 8"),
+            ("jc_004", "JC-2026-0004", "veh_004", "cust_004", "Neethu R.", 8234, "Routine 2nd free service and car wash", [{"issue": "Scheduled service due", "category": "Service", "priority": "Low"}], "No abnormality noted.", "2nd free service items", 2480, 2480, 0, 850, 378, "Approved by Customer", "Paid", "Closed", "2nd Free Service", "Online Booking", 0, "Approved by Meera", "", "Bay 2"),
+            ("jc_005", "JC-2026-0005", "veh_005", "cust_005", "Arjun M.", 18876, "Brake issue plus alignment required", [{"issue": "Brake pad wear", "category": "Brake", "priority": "High"}], "Front pad wear and steering vibration.", "Brake pad replacement and wheel alignment", 20470, 20780, 450, 12000, 3170, "Re-approval Required", "Unpaid", "In Progress", "Running Repair", "Walk-in", 1, "Initial approval from Joseph", "", "Bay 4"),
             ("jc_006", "JC-2026-0006", "veh_006", "cust_006", "Neethu R.", 12101, "3rd service and check mileage drop", [{"issue": "Periodic service due", "category": "Service", "priority": "Low"}], "Spark plug condition to be checked.", "Third service, scan and fuel system cleaning", 3920, 0, 0, 0, 598, "Pending", "Unpaid", "Estimate Prepared", "3rd Free Service", "Online Booking", 0, "", "", ""),
-            ("jc_007", "JC-2026-0007", "veh_007", "cust_007", "Arjun M.", 6950, "1st free service, pickup and drop requested", [{"issue": "Scheduled service due", "category": "Service", "priority": "Low"}], "Vehicle clean, no issues observed.", "1st service", 2350, 0, 0, 550, 359, "Approved by Customer", "Unpaid", "Assigned", "1st Free Service", "Phone Booking", 0, "Approved by Arun Babu", "", "Bay 1"),
-            ("jc_008", "JC-2026-0008", "veh_008", "cust_008", "Neethu R.", 27654, "AC not cooling and warning light came once", [{"issue": "AC not cooling", "category": "AC / HVAC", "priority": "High"}], "Compressor engagement delayed.", "AC diagnosis, diagnostic scan", 6640, 6640, 200, 0, 1013, "Approved by Customer", "Paid", "Paid", "Running Repair", "RSA / Breakdown", 1, "Approved by Lakshmi Prasad", "", "Bay 7"),
+            ("jc_007", "JC-2026-0007", "veh_007", "cust_007", "Arjun M.", 6950, "1st free service, pickup and drop requested", [{"issue": "Scheduled service due", "category": "Service", "priority": "Low"}], "Vehicle clean, no issues observed.", "1st service", 2350, 0, 0, 550, 359, "Approved by Customer", "Unpaid", "Assigned", "1st Free Service", "Phone Booking", 0, "Approved by Arun", "", "Bay 1"),
+            ("jc_008", "JC-2026-0008", "veh_008", "cust_008", "Neethu R.", 27654, "AC not cooling and warning light came once", [{"issue": "AC not cooling", "category": "AC / HVAC", "priority": "High"}], "Compressor engagement delayed.", "AC diagnosis, diagnostic scan", 6640, 6640, 200, 0, 1013, "Approved by Customer", "Paid", "Paid", "Running Repair", "RSA / Breakdown", 1, "Approved by Lakshmi", "", "Bay 7"),
             ("jc_009", "JC-2026-0009", "veh_009", "cust_009", "Arjun M.", 40128, "Repeat brake noise and wheel humming sound", [{"issue": "Repeat brake complaint", "category": "Brake", "priority": "High"}], "Likely wheel bearing issue.", "Brake inspection and wheel bearing replacement", 7820, 0, 150, 0, 1193, "Pending", "Unpaid", "Draft", "General Check-up", "Repeat Visit", 1, "", "", ""),
-            ("jc_010", "JC-2026-0010", "veh_012", "cust_012", "Neethu R.", 16780, "Body scratch repair and polish", [{"issue": "Body scratch repair", "category": "Body / Exterior", "priority": "Medium"}], "Rear bumper and right fender scratches visible.", "Minor body repair and exterior polish", 9680, 9680, 500, 1200, 1477, "Approved by Customer", "Paid", "Closed", "Body Shop", "Walk-in", 0, "Approved by Priya Radhakrishnan", "", "Bay 9"),
+            ("jc_010", "JC-2026-0010", "veh_012", "cust_012", "Neethu R.", 16780, "Body scratch repair and polish", [{"issue": "Body scratch repair", "category": "Body / Exterior", "priority": "Medium"}], "Rear bumper and right fender scratches visible.", "Minor body repair and exterior polish", 9680, 9680, 500, 1200, 1477, "Approved by Customer", "Paid", "Closed", "Body Shop", "Walk-in", 0, "Approved by Priya", "", "Bay 9"),
         ]
         base_created = datetime(2026, 3, 27, 8, 0, 0)
         insert_many(
@@ -284,9 +286,9 @@ def seed_data() -> None:
         )
 
         svc_map = {
-            "jc_001": [("svc_002", "2nd Free Service", 1, 0, "Suggested Services"), ("svc_005", "Brake Inspection & Cleaning", 1, 950, "Suggested Services"), ("svc_008", "Wheel Balancing", 1, 650, "ADD SERVICES")],
+            "jc_001": [("svc_002", "2nd Free Service", 1, 0, "Suggested Services"), ("svc_005", "Brake Inspection & Cleaning", 1, 950, "Suggested Services"), ("svc_016", "Maruti Suzuki 2-year Service", 1, 12000, "ADD SERVICES")],
             "jc_003": [("svc_009", "AC Diagnosis", 1, 1100, "Suggested Services"), ("svc_011", "Electrical Diagnosis", 1, 1350, "Suggested Services")],
-            "jc_005": [("svc_006", "Brake Pad Replacement", 1, 1250, "Suggested Services"), ("svc_007", "Wheel Alignment", 1, 780, "Suggested Services"), ("svc_008", "Wheel Balancing", 1, 650, "ADD SERVICES")],
+            "jc_005": [("svc_006", "Brake Pad Replacement", 1, 1250, "Suggested Services"), ("svc_007", "Wheel Alignment", 1, 780, "Suggested Services"), ("svc_016", "Maruti Suzuki 2-year Service", 1, 12000, "ADD SERVICES")],
             "jc_010": [("svc_012", "Minor Body Repair", 1, 2800, "Suggested Services"), ("svc_013", "Exterior Polishing", 1, 1200, "ADD SERVICES")],
         }
         service_rows = []
@@ -336,54 +338,47 @@ def seed_data() -> None:
 
         sales_catalog_rows = []
         sales_catalog_defs = {
-            "Tata Nexon": [
-                ("XE · Manual · Petrol", 800000),
-                ("XM · Manual · Petrol", 870000),
-                ("XZ+ · AMT · Diesel", 1080000),
-                ("Dark Edition · AMT · Diesel", 1190000),
-                ("EV Max", 1450000),
+            "Maruti Suzuki Brezza": [
+                ("LXi - Manual - Petrol", 860000),
+                ("VXi - Manual - Petrol", 975000),
+                ("ZXi - Manual - Petrol", 1115000),
+                ("ZXi AT - Petrol", 1265000),
             ],
-            "Tata Harrier": [
-                ("XE", 1520000),
-                ("XM", 1660000),
-                ("XT+", 1820000),
-                ("XMA", 1940000),
-                ("XZ+", 2140000),
+            "Maruti Suzuki Fronx": [
+                ("Sigma - Manual - Petrol", 760000),
+                ("Delta+ - Turbo - Manual", 975000),
+                ("Zeta Turbo - AT", 1175000),
+                ("Alpha Turbo - AT", 1300000),
             ],
-            "Tata Punch": [
-                ("Pure · Manual · Petrol", 620000),
-                ("Adventure · AMT · Petrol", 780000),
-                ("Accomplished · AMT · Petrol", 890000),
-                ("Creative · AMT · Petrol", 1020000),
-                ("EV", 1080000),
+            "Maruti Suzuki Baleno": [
+                ("Sigma - Manual - Petrol", 690000),
+                ("Delta - Manual - Petrol", 780000),
+                ("Zeta - AMT - Petrol", 915000),
+                ("Alpha - AMT - Petrol", 985000),
             ],
-            "Tata Altroz": [
-                ("XE · Manual · Petrol", 660000),
-                ("XM · Manual · Petrol", 720000),
-                ("XT · Manual · Petrol", 790000),
-                ("XZ · Manual · Petrol", 860000),
-                ("XZ+ · DCT · Petrol", 980000),
-                ("Dark · DCT", 1050000),
+            "Maruti Suzuki Grand Vitara": [
+                ("Sigma - Manual - Petrol", 1150000),
+                ("Delta - AT - Petrol", 1380000),
+                ("Zeta - AT - Petrol", 1595000),
+                ("Alpha Strong Hybrid - e-CVT", 1980000),
             ],
-            "Tata Safari": [
-                ("XE · Manual", 1600000),
-                ("XM · Manual", 1750000),
-                ("XT+ · AMT", 2100000),
-                ("XZ+ · AMT", 2350000),
-                ("XZA+ · AWD", 2650000),
+            "Maruti Suzuki Ertiga": [
+                ("LXi - Manual - Petrol", 875000),
+                ("VXi - Manual - Petrol", 995000),
+                ("ZXi - Manual - Petrol", 1125000),
+                ("ZXi+ AT - Petrol", 1330000),
             ],
-            "Tata Tiago": [
-                ("XE · Manual · Petrol", 500000),
-                ("XM · Manual · Petrol", 570000),
-                ("XT · Manual · Petrol", 620000),
-                ("XZ+ · AMT · Petrol", 700000),
-                ("NRG · AMT", 740000),
+            "Maruti Suzuki Swift": [
+                ("LXi - Manual - Petrol", 650000),
+                ("VXi - Manual - Petrol", 745000),
+                ("ZXi - Manual - Petrol", 840000),
+                ("ZXi+ AMT - Petrol", 915000),
             ],
-            "Tata Tigor": [
-                ("XE · Manual · Petrol", 600000),
-                ("XM · Manual · Petrol", 670000),
-                ("XT · Manual · Petrol", 730000),
-                ("XZ+ · AMT · Petrol", 810000),
+            "Maruti Suzuki WagonR": [
+                ("LXi - Manual - Petrol", 570000),
+                ("VXi - Manual - Petrol", 625000),
+                ("ZXi - AMT - Petrol", 705000),
+                ("ZXi CNG - Manual", 745000),
             ],
         }
         catalog_index = 1
@@ -392,7 +387,7 @@ def seed_data() -> None:
                 sales_catalog_rows.append(
                     {
                         "id": f"scat_{catalog_index:03d}",
-                        "make": "Tata",
+                        "make": "Maruti Suzuki",
                         "model": model,
                         "variant": variant,
                         "ex_showroom_price": price,
@@ -408,43 +403,40 @@ def seed_data() -> None:
 
         sales_inventory_rows = []
         sales_inventory_defs = {
-            "Tata Nexon": [
-                ("Pristine White", "XM · Manual · Petrol", 3, "Kochi Main Yard", "Immediate"),
-                ("Daytona Grey", "XZ+ · AMT · Diesel", 1, "Kochi Main Yard", "Immediate"),
-                ("Flame Red", "XZ+ · AMT · Diesel", 0, "Ernakulam Transit", "~12 days"),
-                ("Midnight Black", "Dark Edition · AMT · Diesel", 2, "Thrissur Depot", "3-5 days"),
-                ("Deep Forest Green", "EV Max", 1, "Kochi Main Yard", "Immediate"),
+            "Maruti Suzuki Brezza": [
+                ("Sizzling Red", "VXi - Manual - Petrol", 3, "Kochi Main Yard", "Immediate"),
+                ("Magma Grey", "ZXi - Manual - Petrol", 2, "Kochi Main Yard", "Immediate"),
+                ("Pearl Arctic White", "ZXi AT - Petrol", 1, "Ernakulam Transit", "~5 days"),
             ],
-            "Tata Harrier": [
-                ("Pristine White", "XT+", 2, "Kochi Main Yard", "Immediate"),
-                ("Oberon Black", "XMA", 1, "Kochi Main Yard", "Immediate"),
-                ("Calypso Red", "XZ+", 0, "Factory Allocation", "~21 days"),
-                ("Stellar Frost", "XZ+", 1, "Ernakulam Transit", "~7 days"),
+            "Maruti Suzuki Fronx": [
+                ("Nexa Blue", "Delta+ - Turbo - Manual", 2, "Kochi Main Yard", "Immediate"),
+                ("Earthen Brown", "Zeta Turbo - AT", 1, "Kochi Main Yard", "Immediate"),
+                ("Opulent Red", "Alpha Turbo - AT", 0, "Factory Allocation", "~12 days"),
             ],
-            "Tata Punch": [
-                ("Pristine White", "Adventure · AMT · Petrol", 4, "Kochi Main Yard", "Immediate"),
-                ("Tornado Blue", "Accomplished · AMT · Petrol", 2, "Kochi Main Yard", "Immediate"),
-                ("Dune Dust", "Creative · AMT · Petrol", 0, "Factory Allocation", "~18 days"),
-                ("Flame Red", "EV", 1, "Kochi Main Yard", "Immediate"),
+            "Maruti Suzuki Baleno": [
+                ("Nexa Blue", "Delta - Manual - Petrol", 4, "Kochi Main Yard", "Immediate"),
+                ("Grandeur Grey", "Zeta - AMT - Petrol", 2, "Kochi Main Yard", "Immediate"),
+                ("Pearl Arctic White", "Alpha - AMT - Petrol", 1, "Thrissur Depot", "2-3 days"),
             ],
-            "Tata Altroz": [
-                ("Avenue White", "XM · Manual · Petrol", 3, "Kochi Main Yard", "Immediate"),
-                ("Harbour Blue", "XZ+ · DCT · Petrol", 1, "Kochi Main Yard", "Immediate"),
-                ("Downtown Red", "Dark · DCT", 0, "Factory Allocation", "~14 days"),
+            "Maruti Suzuki Grand Vitara": [
+                ("Chestnut Brown", "Delta - AT - Petrol", 2, "Kochi Main Yard", "Immediate"),
+                ("Arctic White", "Zeta - AT - Petrol", 1, "Kochi Main Yard", "Immediate"),
+                ("Nexa Blue", "Alpha Strong Hybrid - e-CVT", 0, "Factory Allocation", "~14 days"),
             ],
-            "Tata Safari": [
-                ("Stellar Frost", "XT+ · AMT", 1, "Kochi Main Yard", "Immediate"),
-                ("Tropical Mist", "XZ+ · AMT", 0, "Ernakulam Transit", "~10 days"),
-                ("Oberon Black", "XZA+ · AWD", 1, "Kochi Main Yard", "Immediate"),
+            "Maruti Suzuki Ertiga": [
+                ("Pearl Metallic Auburn Red", "VXi - Manual - Petrol", 2, "Kochi Main Yard", "Immediate"),
+                ("Splendid Silver", "ZXi - Manual - Petrol", 2, "Kochi Main Yard", "Immediate"),
+                ("Magma Grey", "ZXi+ AT - Petrol", 1, "Ernakulam Transit", "~6 days"),
             ],
-            "Tata Tiago": [
-                ("Teal By Tata", "XM · Manual · Petrol", 5, "Kochi Main Yard", "Immediate"),
-                ("Arizona Blue", "XZ+ · AMT · Petrol", 2, "Kochi Main Yard", "Immediate"),
-                ("Flame Red", "NRG · AMT", 1, "Thrissur Depot", "2-3 days"),
+            "Maruti Suzuki Swift": [
+                ("Luster Blue", "VXi - Manual - Petrol", 3, "Kochi Main Yard", "Immediate"),
+                ("Sizzling Red", "ZXi - Manual - Petrol", 2, "Kochi Main Yard", "Immediate"),
+                ("Pearl Arctic White", "ZXi+ AMT - Petrol", 1, "Thrissur Depot", "2-3 days"),
             ],
-            "Tata Tigor": [
-                ("Magnetic Red", "XT · Manual · Petrol", 2, "Kochi Main Yard", "Immediate"),
-                ("Pearlescent White", "XZ+ · AMT · Petrol", 1, "Kochi Main Yard", "Immediate"),
+            "Maruti Suzuki WagonR": [
+                ("Silky Silver", "VXi - Manual - Petrol", 4, "Kochi Main Yard", "Immediate"),
+                ("Magma Grey", "ZXi - AMT - Petrol", 2, "Kochi Main Yard", "Immediate"),
+                ("Solid White", "ZXi CNG - Manual", 1, "Ernakulam Transit", "~4 days"),
             ],
         }
         inventory_index = 1
@@ -469,11 +461,11 @@ def seed_data() -> None:
             {
                 "id": "lead_001",
                 "lead_no": "LEAD-2026-0001",
-                "customer_name": "Anjali Nair",
+                "customer_name": "Anjali",
                 "phone": "+91 98765 43210",
                 "email": "anjali.sales@example.com",
-                "interested_model": "Tata Nexon",
-                "interested_variant": "XZ+ · AMT · Diesel",
+                "interested_model": "Maruti Suzuki Brezza",
+                "interested_variant": "ZXi AT - Petrol",
                 "showroom_location": "Kochi Showroom",
                 "enquiry_source": "Walk-in",
                 "lead_status": "Soft Booked",
@@ -487,11 +479,11 @@ def seed_data() -> None:
             {
                 "id": "lead_002",
                 "lead_no": "LEAD-2026-0002",
-                "customer_name": "Rohit Menon",
+                "customer_name": "Rohit",
                 "phone": "+91 91234 56789",
                 "email": "rohit.menon@example.com",
-                "interested_model": "Tata Harrier",
-                "interested_variant": "XMA",
+                "interested_model": "Maruti Suzuki Grand Vitara",
+                "interested_variant": "Zeta - AT - Petrol",
                 "showroom_location": "Kochi Showroom",
                 "enquiry_source": "Website",
                 "lead_status": "Needs Time to Decide",
@@ -505,11 +497,11 @@ def seed_data() -> None:
             {
                 "id": "lead_003",
                 "lead_no": "LEAD-2026-0003",
-                "customer_name": "Priya Suresh",
+                "customer_name": "Priya",
                 "phone": "+91 94567 89012",
                 "email": "priya.suresh@example.com",
-                "interested_model": "Tata Punch",
-                "interested_variant": "Adventure · AMT · Petrol",
+                "interested_model": "Maruti Suzuki Fronx",
+                "interested_variant": "Delta+ - Turbo - Manual",
                 "showroom_location": "Kochi Showroom",
                 "enquiry_source": "Walk-in",
                 "lead_status": "Test Drive Scheduled",
@@ -523,10 +515,10 @@ def seed_data() -> None:
             {
                 "id": "lead_004",
                 "lead_no": "LEAD-2026-0004",
-                "customer_name": "Arun Kumar",
+                "customer_name": "Arun",
                 "phone": "+91 99887 76655",
                 "email": "arun.kumar@example.com",
-                "interested_model": "Tata Altroz",
+                "interested_model": "Maruti Suzuki Baleno",
                 "interested_variant": "XM · Manual · Petrol",
                 "showroom_location": "Kochi Showroom",
                 "enquiry_source": "Walk-in",
@@ -541,11 +533,11 @@ def seed_data() -> None:
             {
                 "id": "lead_005",
                 "lead_no": "LEAD-2026-0005",
-                "customer_name": "Deepa Thomas",
+                "customer_name": "Deepa",
                 "phone": "+91 90011 22334",
                 "email": "deepa.thomas@example.com",
-                "interested_model": "Tata Safari",
-                "interested_variant": "XZ+ · AMT",
+                "interested_model": "Maruti Suzuki Ertiga",
+                "interested_variant": "ZXi - Manual - Petrol",
                 "showroom_location": "Thrissur Branch",
                 "enquiry_source": "Referral",
                 "lead_status": "Not Proceeding",
@@ -559,11 +551,11 @@ def seed_data() -> None:
             {
                 "id": "lead_006",
                 "lead_no": "LEAD-2026-0006",
-                "customer_name": "Vishnu Pillai",
+                "customer_name": "Vishnu",
                 "phone": "+91 80123 45678",
                 "email": "vishnu.pillai@example.com",
-                "interested_model": "Tata Nexon",
-                "interested_variant": "EV Max",
+                "interested_model": "Maruti Suzuki Swift",
+                "interested_variant": "ZXi+ AMT - Petrol",
                 "showroom_location": "Kochi Showroom",
                 "enquiry_source": "Phone Call",
                 "lead_status": "Will Visit Again",
@@ -581,7 +573,7 @@ def seed_data() -> None:
             {
                 "id": "td_001",
                 "lead_id": "lead_001",
-                "model": "Tata Nexon",
+                "model": "Maruti Suzuki Brezza",
                 "scheduled_date": "2026-04-01",
                 "scheduled_time": "10:00",
                 "status": "Done",
@@ -593,7 +585,7 @@ def seed_data() -> None:
             {
                 "id": "td_002",
                 "lead_id": "lead_002",
-                "model": "Tata Harrier",
+                "model": "Maruti Suzuki Grand Vitara",
                 "scheduled_date": "2026-03-31",
                 "scheduled_time": "15:30",
                 "status": "Done",
@@ -605,7 +597,7 @@ def seed_data() -> None:
             {
                 "id": "td_003",
                 "lead_id": "lead_003",
-                "model": "Tata Punch",
+                "model": "Maruti Suzuki Fronx",
                 "scheduled_date": "2026-04-02",
                 "scheduled_time": "11:00",
                 "status": "Scheduled",
@@ -617,11 +609,11 @@ def seed_data() -> None:
             {
                 "id": "td_004",
                 "lead_id": "lead_006",
-                "model": "Tata Nexon",
+                "model": "Maruti Suzuki Swift",
                 "scheduled_date": "2026-04-01",
                 "scheduled_time": "17:00",
                 "status": "Done",
-                "notes": "EV explanation required more time.",
+                "notes": "Customer wants another family review drive.",
                 "completed_at": "2026-04-01T17:40:00",
                 "created_at": "2026-04-01T15:30:00",
                 "updated_at": "2026-04-01T17:40:00",
@@ -673,14 +665,14 @@ def seed_data() -> None:
             {
                 "id": "set_001",
                 "lead_id": "lead_001",
-                "model": "Tata Nexon",
-                "variant": "XZ+ · AMT · Diesel",
-                "ex_showroom_price": 1080000,
-                "road_tax": 108000,
-                "insurance": 37800,
+                "model": "Maruti Suzuki Brezza",
+                "variant": "ZXi AT - Petrol",
+                "ex_showroom_price": 1265000,
+                "road_tax": 126500,
+                "insurance": 44275,
                 "addons": 15000,
                 "handling": 8000,
-                "on_road_total": 1248800,
+                "on_road_total": 1459775,
                 "reviewed_at": "2026-04-01T11:00:00",
                 "created_at": "2026-04-01T11:00:00",
                 "updated_at": "2026-04-01T11:00:00",
@@ -693,9 +685,9 @@ def seed_data() -> None:
                 "id": "sbk_001",
                 "lead_id": "lead_001",
                 "booking_no": "BK-2026-0001",
-                "model": "Tata Nexon",
-                "variant": "XZ+ · AMT · Diesel",
-                "color_preference": "Pristine White",
+                "model": "Maruti Suzuki Brezza",
+                "variant": "ZXi AT - Petrol",
+                "color_preference": "Pearl Arctic White",
                 "finance_type": "Finance / Loan",
                 "booking_date": "2026-04-01",
                 "advance_amount": 30000,

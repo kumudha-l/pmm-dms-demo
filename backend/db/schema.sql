@@ -171,6 +171,29 @@ CREATE TABLE IF NOT EXISTS notifications (
   FOREIGN KEY (job_card_id) REFERENCES job_cards(id)
 );
 
+CREATE TABLE IF NOT EXISTS service_checkins (
+  id TEXT PRIMARY KEY,
+  check_in_no TEXT NOT NULL UNIQUE,
+  customer_name TEXT NOT NULL,
+  phone TEXT,
+  email TEXT,
+  address TEXT,
+  reg_no TEXT NOT NULL,
+  make TEXT NOT NULL,
+  model TEXT NOT NULL,
+  variant TEXT NOT NULL,
+  current_km INTEGER DEFAULT 0,
+  opening_km INTEGER NOT NULL DEFAULT 0,
+  appointment_status TEXT NOT NULL,
+  appointment_date TEXT NOT NULL,
+  appointment_time TEXT NOT NULL,
+  purpose_of_visit TEXT NOT NULL,
+  advisor_name TEXT NOT NULL,
+  notes TEXT,
+  pdf_path TEXT,
+  created_at TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS sales_leads (
   id TEXT PRIMARY KEY,
   lead_no TEXT NOT NULL UNIQUE,

@@ -105,6 +105,44 @@ def _build_gate_pass_lines(job_card: dict) -> list[str]:
     return expanded
 
 
+def _build_check_in_pass_lines(check_in: dict) -> list[str]:
+    lines = [
+        "Popular Mega Motors - Security Check-in Pass",
+        "",
+        f"Check-in No: {check_in.get('check_in_no', '-')}",
+        f"Created At: {check_in.get('created_at', '-')}",
+        "",
+        "Customer Details",
+        f"Name: {check_in.get('customer_name', '-')}",
+        f"Phone: {check_in.get('phone', '-')}",
+        f"Email: {check_in.get('email', '-')}",
+        f"Address: {check_in.get('address', '-')}",
+        "",
+        "Vehicle Details",
+        f"Reg No: {check_in.get('reg_no', '-')}",
+        f"Vehicle: {check_in.get('make', '')} {check_in.get('model', '')} {check_in.get('variant', '')}".strip(),
+        f"Current KM: {check_in.get('current_km', '-')}",
+        f"Entry Odometer: {check_in.get('opening_km', '-')}",
+        "",
+        "Visit Details",
+        f"Appointment Status: {check_in.get('appointment_status', '-')}",
+        f"Appointment Date: {check_in.get('appointment_date', '-')}",
+        f"Appointment Time: {check_in.get('appointment_time', '-')}",
+        f"Purpose of Visit: {check_in.get('purpose_of_visit', '-')}",
+        f"Advisor: {check_in.get('advisor_name', '-')}",
+        f"Security Notes: {check_in.get('notes', '-') or '-'}",
+        "",
+        "Gate Notes",
+        "Customer cleared for service-center entry.",
+        "Please direct the vehicle to the advisor reception after gate verification.",
+    ]
+    expanded: list[str] = []
+    for line in lines:
+        wrapped = wrap(str(line), width=95) or [""]
+        expanded.extend(wrapped)
+    return expanded
+
+
 def _build_pdf_bytes(lines: list[str]) -> bytes:
     page_height = 792
     margin_top = 50
@@ -185,4 +223,15 @@ def generate_gate_pass_pdf(job_card: dict) -> str:
     pdf_bytes = _build_pdf_bytes(_build_gate_pass_lines(job_card))
     Path(path).write_bytes(pdf_bytes)
     logger.info("Gate pass generated successfully at %s.", path)
+    return str(path)
+
+
+def generate_check_in_pass_pdf(check_in: dict) -> str:
+    PDF_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    filename = f"{check_in.get('check_in_no', check_in.get('id', 'check-in'))}-entry-pass.pdf"
+    path = PDF_OUTPUT_DIR / filename
+    logger.info("Check-in pass generation started for %s.", check_in.get("check_in_no", check_in.get("id")))
+    pdf_bytes = _build_pdf_bytes(_build_check_in_pass_lines(check_in))
+    Path(path).write_bytes(pdf_bytes)
+    logger.info("Check-in pass generated successfully at %s.", path)
     return str(path)

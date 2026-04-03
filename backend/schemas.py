@@ -70,6 +70,17 @@ class PaymentRequest(BaseModel):
     notes: Optional[str] = ""
 
 
+class CheckInCreateRequest(BaseModel):
+    reg_no: str
+    opening_km: int = 0
+    appointment_status: str = "Appointment Confirmed"
+    appointment_date: str
+    appointment_time: str
+    purpose_of_visit: str
+    advisor_name: str
+    notes: Optional[str] = ""
+
+
 class SalesLeadCreateRequest(BaseModel):
     customer_name: str
     phone: str

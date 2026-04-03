@@ -42,7 +42,7 @@ export default function NewJobCard() {
   const [plateFile, setPlateFile] = useState(null);
   const [odometerFile, setOdometerFile] = useState(null);
   const [regNo, setRegNo] = useState(query.get("regNo") || "");
-  const [openingKm, setOpeningKm] = useState("");
+  const [openingKm, setOpeningKm] = useState("0");
   const [vehicle, setVehicle] = useState(null);
   const [history, setHistory] = useState([]);
   const [paymentHistory, setPaymentHistory] = useState([]);
@@ -268,9 +268,6 @@ export default function NewJobCard() {
           <button type="button" onClick={() => runLookup()} className="rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700">Lookup Vehicle</button>
         </div>
       </SectionCard>
-
-      <VehicleLookupCard vehicle={vehicle} />
-      {history.length ? <ServiceHistory history={history} paymentHistory={paymentHistory} /> : null}
 
       <SectionCard title="Job Card Core Details" subtitle="Clear separation of customer issues, advisor observations, and suggested repairs">
         <div className="mb-4 grid gap-4 md:grid-cols-3">
