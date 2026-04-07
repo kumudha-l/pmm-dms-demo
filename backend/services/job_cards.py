@@ -36,6 +36,14 @@ def default_checklist_for_assignment(assignment_type: str, assigned_task: str) -
     ]
 
 
+def derive_task_status(tasks: list[dict]) -> str:
+    if not tasks or not any(task.get("done") for task in tasks):
+        return "Pending"
+    if all(task.get("done") for task in tasks):
+        return "Completed"
+    return "In Progress"
+
+
 def generate_job_card_no(conn) -> str:
     rows = conn.execute("SELECT job_card_no FROM job_cards WHERE job_card_no LIKE 'JC-2026-%'").fetchall()
     max_suffix = 0
@@ -334,6 +342,49 @@ def assign_technicians(conn, job_card_id: str, assignments: list[dict], bay_no: 
         )
     conn.execute("UPDATE job_cards SET status = 'Assigned', bay_no = COALESCE(?, bay_no), updated_at = ? WHERE id = ?", (bay_no, now_iso(), job_card_id))
     logger.info("Technician assignment completed for %s.", job_card_id)
+    return get_job_card_detail(conn, job_card_id)
+
+
+def update_technician_checklist(conn, job_card_ref: str, assignment_id: str, tasks: list[dict]) -> dict:
+    logger.info("Technician checklist update started for %s / %s.", job_card_ref, assignment_id)
+    job_card_id = resolve_job_card_id(conn, job_card_ref)
+    assignment = conn.execute(
+        "SELECT id FROM job_card_technicians WHERE id = ? AND job_card_id = ?",
+        (assignment_id, job_card_id),
+    ).fetchone()
+    if not assignment:
+        raise HTTPException(status_code=404, detail="Technician assignment not found.")
+
+    normalized_tasks = [
+        {
+            "label": str(task.get("label", "")).strip(),
+            "done": bool(task.get("done")),
+        }
+        for task in tasks
+        if str(task.get("label", "")).strip()
+    ]
+    task_status = derive_task_status(normalized_tasks)
+    conn.execute(
+        "UPDATE job_card_technicians SET checklist_json = ?, task_status = ? WHERE id = ?",
+        (json.dumps(normalized_tasks), task_status, assignment_id),
+    )
+
+    assignment_rows = conn.execute(
+        "SELECT checklist_json FROM job_card_technicians WHERE job_card_id = ?",
+        (job_card_id,),
+    ).fetchall()
+    all_tasks = []
+    for row in assignment_rows:
+        try:
+            all_tasks.extend(json.loads(row["checklist_json"] or "[]"))
+        except json.JSONDecodeError:
+            continue
+    overall_status = "Work Completed" if all_tasks and all(task.get("done") for task in all_tasks) else "In Progress"
+    conn.execute(
+        "UPDATE job_cards SET status = ?, updated_at = ? WHERE id = ?",
+        (overall_status, now_iso(), job_card_id),
+    )
+    logger.info("Technician checklist update completed for %s / %s.", job_card_ref, assignment_id)
     return get_job_card_detail(conn, job_card_id)
 
 

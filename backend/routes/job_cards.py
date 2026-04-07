@@ -1,9 +1,9 @@
 from fastapi import APIRouter, BackgroundTasks
 
 from db.database import FEEDBACK_FORM_URL, db_cursor
-from schemas import EstimateRequest, JobCardCreateRequest, JobCardUpdateRequest, PaymentRequest, TechnicianAssignmentRequest
+from schemas import EstimateRequest, JobCardCreateRequest, JobCardUpdateRequest, PaymentRequest, TechnicianAssignmentRequest, TechnicianChecklistUpdateRequest
 from services.email_service import send_job_card_email_background
-from services.job_cards import assign_technicians, close_job_card, create_job_card, get_job_card_detail, record_payment, recompute_job_card_estimate, update_job_card
+from services.job_cards import assign_technicians, close_job_card, create_job_card, get_job_card_detail, record_payment, recompute_job_card_estimate, update_job_card, update_technician_checklist
 from services.logger import get_logger
 from services.pdf_service import generate_gate_pass_pdf, generate_job_card_pdf
 
@@ -47,6 +47,12 @@ def estimate_job_card_route(job_card_id: str, payload: EstimateRequest):
 def assign_route(job_card_id: str, payload: TechnicianAssignmentRequest):
     with db_cursor() as conn:
         return assign_technicians(conn, job_card_id, payload.assignments, payload.bay_no)
+
+
+@router.put("/{job_card_id}/technicians/{assignment_id}/checklist")
+def update_technician_checklist_route(job_card_id: str, assignment_id: str, payload: TechnicianChecklistUpdateRequest):
+    with db_cursor() as conn:
+        return update_technician_checklist(conn, job_card_id, assignment_id, payload.tasks)
 
 
 @router.post("/{job_card_id}/payment")

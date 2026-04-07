@@ -121,13 +121,13 @@ def seed_data() -> None:
         )
 
         technician_defs = [
-            ("tech_001", "PMM-T001", "Suresh Nair", "General Service", "Senior", "Available", "General Service Bay", "Bay 3", 2),
-            ("tech_002", "PMM-T002", "Akhil Jose", "Brake Specialist", "Senior", "Available", "General Service Bay", "Bay 4", 3),
-            ("tech_003", "PMM-T003", "Rahul Biju", "Wheel Alignment Technician", "Intermediate", "Available", "Wheel Alignment Bay", "Bay 6", 1),
-            ("tech_004", "PMM-T004", "Shafeeq Ali", "AC Technician", "Senior", "Busy", "Diagnostic Bay", "Bay 8", 5),
-            ("tech_005", "PMM-T005", "Nithin Paul", "Electrical Technician", "Senior", "Available", "Diagnostic Bay", "Bay 7", 2),
-            ("tech_006", "PMM-T006", "Vishnu Das", "Diagnostic Technician", "Senior", "Available", "Diagnostic Bay", "Bay 5", 2),
-            ("tech_007", "PMM-T007", "Jomon Varghese", "General Service", "Intermediate", "Leave", "Express Bay", "Bay 2", 0),
+            ("tech_001", "PMM-T001", "Suresh", "General Service", "Senior", "Available", "General Service Bay", "Bay 3", 2),
+            ("tech_002", "PMM-T002", "Akhil", "Brake Specialist", "Senior", "Available", "General Service Bay", "Bay 4", 3),
+            ("tech_003", "PMM-T003", "Rahul", "Wheel Alignment Technician", "Intermediate", "Available", "Wheel Alignment Bay", "Bay 6", 1),
+            ("tech_004", "PMM-T004", "Shafeeq", "AC Technician", "Senior", "Busy", "Diagnostic Bay", "Bay 8", 5),
+            ("tech_005", "PMM-T005", "Nithin", "Electrical Technician", "Senior", "Available", "Diagnostic Bay", "Bay 7", 2),
+            ("tech_006", "PMM-T006", "Vishnu", "Diagnostic Technician", "Senior", "Available", "Diagnostic Bay", "Bay 5", 2),
+            ("tech_007", "PMM-T007", "Jomon", "General Service", "Intermediate", "Leave", "Express Bay", "Bay 2", 0),
         ]
         insert_many(
             conn,

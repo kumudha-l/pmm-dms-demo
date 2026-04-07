@@ -63,6 +63,10 @@ class TechnicianAssignmentRequest(BaseModel):
     bay_no: Optional[str] = None
 
 
+class TechnicianChecklistUpdateRequest(BaseModel):
+    tasks: list[dict[str, Any]] = Field(default_factory=list)
+
+
 class PaymentRequest(BaseModel):
     amount: float
     payment_method: str

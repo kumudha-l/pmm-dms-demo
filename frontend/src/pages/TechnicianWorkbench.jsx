@@ -5,7 +5,7 @@ import LoadingSpinner from "../components/shared/LoadingSpinner";
 import EmptyState from "../components/shared/EmptyState";
 import TaskList from "../components/technician/TaskList";
 import AdditionalIssueForm from "../components/technician/AdditionalIssueForm";
-import { getJobCard, updateJobCard } from "../services/jobCardService";
+import { getJobCard, updateJobCard, updateTechnicianChecklist } from "../services/jobCardService";
 import { parseComplaint } from "../services/mockAiService";
 import { SERVICE_CATALOG } from "../utils/constants";
 
@@ -47,14 +47,14 @@ export default function TechnicianWorkbench() {
     loadJobCard(requestedJobCardNo);
   }, [requestedJobCardNo]);
 
-  const toggleTask = async (technicianId, index) => {
-    const updatedGroups = technicianGroups.map((tech) => tech.technician_id === technicianId
+  const toggleTask = async (assignmentId, index) => {
+    const updatedGroups = technicianGroups.map((tech) => tech.id === assignmentId
       ? { ...tech, tasks: tech.tasks.map((task, taskIndex) => (taskIndex === index ? { ...task, done: !task.done } : task)) }
       : tech);
-    const allTasks = updatedGroups.flatMap((tech) => tech.tasks);
-    const nextStatus = allTasks.length && allTasks.every((task) => task.done) ? "Work Completed" : "In Progress";
-    const updated = await updateJobCard(jobCard.id, { status: nextStatus });
-    setJobCard({ ...updated, technicians: updatedGroups.map((tech) => ({ ...tech, checklist_json: JSON.stringify(tech.tasks) })) });
+    const assignment = updatedGroups.find((tech) => tech.id === assignmentId);
+    if (!assignment) return;
+    const updated = await updateTechnicianChecklist(jobCard.id, assignmentId, { tasks: assignment.tasks });
+    setJobCard(updated);
   };
 
   const submitAdditionalIssue = async () => {
@@ -110,7 +110,7 @@ export default function TechnicianWorkbench() {
                     title={`${tech.name} - ${tech.assignment_type}`}
                     subtitle={`${tech.specialization} - ${tech.assigned_task}`}
                     tasks={tech.tasks}
-                    onToggle={(taskIndex) => toggleTask(tech.technician_id, taskIndex)}
+                    onToggle={(taskIndex) => toggleTask(tech.id, taskIndex)}
                   />
                 ))}
                 {technicianGroups.length && !technicianGroups.some((tech) => tech.tasks.length) ? <EmptyState title="No checklist found" description="This job card has technicians assigned, but checklist tasks are not available yet." /> : null}
